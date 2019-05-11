@@ -6,7 +6,7 @@ data "aws_availability_zones" "all" {}
 
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
-  name   = "dev-vpc-name"
+  name   = "${var.prefix}-${var.env}"
 
   azs             = "${data.aws_availability_zones.all.names}"
   cidr            = "${var.cidr}"
@@ -34,7 +34,7 @@ module "vpc" {
   }
 
   tags = {
-    Name = "${var.prefix}-${var.env}"
+    Name = "${var.prefix}-tag-${var.env}"
   }
 
   vpc_tags = {
