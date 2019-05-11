@@ -20,6 +20,6 @@ module "web" {
   ami            = "${var.ami}"
   instance_type  = "${var.instance_type}"
   key_name       = "${var.key_name}"
-  subnet_ids = "${data.terraform_remote_state.vpc.public_subnets}"
-  vpc_id = "${data.terraform_remote_state.vpc.vpc_id}" 
+  subnet_ids     = "${data.terraform_remote_state.vpc.public_subnets}"
+  vpc_id         = "${data.terraform_remote_state.vpc.vpc_id}"
 }
