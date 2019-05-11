@@ -1,4 +1,8 @@
-variable "region" {}
+variable "region" {
+  default     = "us-east-1"
+  description = "The name of the AWS region"
+}
+
 variable "prefix" {}
 variable "env" {}
 variable "instance_count" {}
