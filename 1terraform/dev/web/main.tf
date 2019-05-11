@@ -2,10 +2,18 @@ provider "aws" {
   region = "${var.region}"
 }
 
+data "terraform_remote_state" "vpc" {
+  backend = "s3"
+
+  config {
+    bucket = "${var.prefix}-remote-state-${var.env}"
+    key    = "${var.env}/vpc/terraform.tfstate"
+    region = "${var.region}"
+  }
+}
+
 module "web" {
-  #source = "../../../modules/web"
-  source         = "git::ssh://git@github.com/shkrid/terraform-structure-modules.git//web?ref=v0.0.3"
-  region         = "${var.region}"
+  source         = "git::ssh://git@github.com/shkrid/terraform-structure-modules.git//web"
   prefix         = "${var.prefix}"
   env            = "${var.env}"
   instance_count = "${var.instance_count}"
