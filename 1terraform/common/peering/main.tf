@@ -40,7 +40,7 @@ data "terraform_remote_state" "vpc_dst" {
 }
 
 module "peering_dev_to_prod" {
-  source = "../../../../modules/peering"
+  source = "git::ssh://git@github.com/shkrid/terraform-structure-modules.git//peering"
 
   providers = {
     aws.src = "aws.source"
