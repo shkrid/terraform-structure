@@ -24,7 +24,7 @@ data "terraform_remote_state" "vpc_src" {
 
   config {
     bucket = "1terraform-remote-state-dev"
-    key    = "dev/vpc/terraform.tfstate"
+    key    = "vpc/terraform.tfstate"
     region = "us-east-1"
   }
 }
@@ -34,7 +34,7 @@ data "terraform_remote_state" "vpc_dst" {
 
   config {
     bucket = "1terraform-remote-state-prod"
-    key    = "prod/vpc/terraform.tfstate"
+    key    = "vpc/terraform.tfstate"
     region = "us-east-1"
   }
 }

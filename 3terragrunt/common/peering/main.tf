@@ -1,3 +1,7 @@
+terraform {
+  backend "s3" {}
+}
+
 # At this time it is required to write an explicit proxy configuration block even for default (un-aliased) provider 
 # configurations when they will be passed via an explicit providers block:
 # provider "aws" {
@@ -12,29 +16,20 @@ provider "aws" {
 provider "aws" {
   alias  = "source"
   region = "us-east-1"
-
-  assume_role {
-    role_arn = "arn:aws:iam::341835858366:role/admin"
-  }
 }
 
 provider "aws" {
   alias  = "destination"
-  region = "eu-central-1"
-
-  assume_role {
-    role_arn = "arn:aws:iam::870665420981:role/admin"
-  }
+  region = "us-east-1"
 }
 
 data "terraform_remote_state" "vpc_src" {
   backend = "s3"
 
   config {
-    bucket   = "2terraform-multi-remote-state-dev"
-    key      = "vpc/terraform.tfstate"
-    region   = "us-east-1"
-    role_arn = "arn:aws:iam::341835858366:role/admin"
+    bucket = "3terragrunt-remote-state-dev"
+    key    = "vpc/terraform.tfstate"
+    region = "us-east-1"
   }
 }
 
@@ -42,10 +37,9 @@ data "terraform_remote_state" "vpc_dst" {
   backend = "s3"
 
   config {
-    bucket   = "2terraform-multi-remote-state-prod"
-    key      = "vpc/terraform.tfstate"
-    region   = "eu-central-1"
-    role_arn = "arn:aws:iam::870665420981:role/admin"
+    bucket = "3terragrunt-remote-state-prod"
+    key    = "vpc/terraform.tfstate"
+    region = "us-east-1"
   }
 }
 

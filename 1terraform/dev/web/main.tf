@@ -7,7 +7,7 @@ data "terraform_remote_state" "vpc" {
 
   config {
     bucket = "${var.prefix}-remote-state-${var.env}"
-    key    = "${var.env}/vpc/terraform.tfstate"
+    key    = "vpc/terraform.tfstate"
     region = "${var.region}"
   }
 }

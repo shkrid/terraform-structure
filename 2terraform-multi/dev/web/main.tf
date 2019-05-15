@@ -11,7 +11,7 @@ data "terraform_remote_state" "vpc" {
 
   config {
     bucket   = "${var.prefix}-remote-state-${var.env}"
-    key      = "${var.env}/vpc/terraform.tfstate"
+    key      = "vpc/terraform.tfstate"
     region   = "us-east-1"
     role_arn = "arn:aws:iam::341835858366:role/admin"
   }
